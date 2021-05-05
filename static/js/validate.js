@@ -33,10 +33,10 @@ $(function () {
                 data: $(form).serialize(),
                 type: 'POST',
                 success: function(response) {
-                    console.log(response);
+                    window.location.href = "/dashboard/";
                 },
-                error: function(error) {
-                    console.log(error);
+                error: function(resp) {
+                    $(form).find('.error').text(resp.responseJSON.error).removeClass("error-hidden");
                 }
             });
             return false;
