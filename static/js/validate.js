@@ -33,7 +33,39 @@ $(function () {
                 data: $(form).serialize(),
                 type: 'POST',
                 success: function(response) {
-                    window.location.href = "/dashboard/";
+                    window.location.href = '/dashboard/';
+                },
+                error: function(resp) {
+                    $(form).find('.error').text(resp.responseJSON.error).removeClass("error-hidden");
+                }
+            });
+            return false;
+        }
+    });
+    $("form[name='login_form']").validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true
+            }
+        },
+        messages: {
+            password: {
+                required: "Please enter your password"
+            },
+            email: "Please enter a valid email address"
+        },
+        submitHandler: function (form,event) {
+            event.preventDefault();
+            $.ajax({
+                url: "/user/login",
+                data: $(form).serialize(),
+                type: 'POST',
+                success: function(response) {
+                    window.location.href = '/dashboard/';
                 },
                 error: function(resp) {
                     $(form).find('.error').text(resp.responseJSON.error).removeClass("error-hidden");

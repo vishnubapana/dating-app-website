@@ -1,6 +1,8 @@
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
+body {
+	color: #fff;
+	background: #63738a;
+	font-family: 'Roboto', sans-serif;
+}
   .form-signin {
     max-width: 330px;
     padding: 15px;
