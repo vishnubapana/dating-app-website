@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-from flask_mongoengine import MongoEngine
-
+#from flask_mongoengine import MongoEngine
+from user.models import User
 app = Flask(__name__)
 
+'''
 app.config['MONGODB_SETTINGS'] = {
     'db' : 'dating-app',
     'host' : 'localhost',
@@ -21,7 +22,7 @@ class Users(db.Document):
                 "last_name" : self.last_name,
                 "email" : self.email,
                 "password" : self.password}
-
+'''
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -34,14 +35,10 @@ def showSignUp():
 def showLogIn():
     return render_template('login.html')
 
-@app.route('/bruh', methods=['POST'])
-def signUp():
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    email = request.form['email']
-    password = request.form['password']
-
-    
+#routes
+@app.route('/user/signup', methods=['POST'])
+def signup():
+    return User().signup()
 
 if __name__ == '__main__':
     app.run()

@@ -29,7 +29,7 @@ $(function () {
         submitHandler: function (form,event) {
             event.preventDefault();
             $.ajax({
-                url: '/user/signup',
+                url: "/user/signup",
                 data: $(form).serialize(),
                 type: 'POST',
                 success: function(response) {
