@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '../utils/Button'
 import '../css/NavigationBar.css'
 
 
-function NavigationBar() {
+function NavigationBarDashboard() {
 
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -39,7 +38,7 @@ function NavigationBar() {
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/dashboard' className='nav-links' onClick={closeMobileMenu}>
                                 Home
                         </Link>
                         </li>
@@ -49,21 +48,15 @@ function NavigationBar() {
                         </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
-                                Sign In
-                        </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Sign Up
+                            <Link to='/logout' className='nav-links' onClick={closeMobileMenu}>
+                                Logout
                         </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
                 </div>
             </nav>
         </>
     )
 }
 
-export default NavigationBar
+export default NavigationBarDashboard
