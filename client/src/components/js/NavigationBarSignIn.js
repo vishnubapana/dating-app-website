@@ -4,7 +4,7 @@ import { Button } from '../utils/Button'
 import '../css/NavigationBar.css'
 
 
-function NavigationBar() {
+function NavigationBarSignIn() {
 
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -49,11 +49,6 @@ function NavigationBar() {
                         </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/sign-in' className='nav-links' onClick={closeMobileMenu}>
-                                Sign In
-                        </Link>
-                        </li>
-                        <li className='nav-item'>
                             <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
                                 Sign Up
                         </Link>
@@ -66,4 +61,4 @@ function NavigationBar() {
     )
 }
 
-export default NavigationBar
+export default NavigationBarSignIn

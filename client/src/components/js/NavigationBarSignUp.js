@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '../utils/Button'
 import '../css/NavigationBar.css'
 
 
-function NavigationBar() {
+function NavigationBarSignUp() {
 
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -53,17 +52,11 @@ function NavigationBar() {
                                 Sign In
                         </Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Sign Up
-                        </Link>
-                        </li>
                     </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
                 </div>
             </nav>
         </>
     )
 }
 
-export default NavigationBar
+export default NavigationBarSignUp
