@@ -148,6 +148,55 @@ exports.tindercards = (req, res) => {
     })
 }
 
+// Array.prototype.unique = function(array1, array2) {
+//     var array1 = this.concat();
+//     for(var i=0; i<a.length; ++i) {
+//         for(var j=i+1; j<a.length; ++j) {
+//             if(a[i] === a[j])
+//                 a.splice(j--, 1);
+//         }
+//     }
+
+//     return a;
+// };
+
+
+exports.tinderfilteredcards = (req, res) => {
+
+    var filteredIds = []
+    User.findOne({'_id': req.params.id}, (err, passedUser) => {
+        if(err){
+            return res.status(400).json({
+                    error: err
+            })
+        }
+
+        filteredIds = filteredIds.concat(passedUser.leftSwipes)
+        filteredIds = filteredIds.concat(passedUser.rightSwipes)
+    });
+    User.find({}, (err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        var map = []
+
+        users.forEach(function(user) {
+            if(user._id != req.params.id && !filteredIds.includes(''+user._id)){
+                map.push({"name": user.name, "url": user.profileImgUrl})
+            }
+            
+          })
+
+        // Send response
+        return res.json({
+            user: map
+        })
+    })
+}
+
 
 exports.rightswipeupdate = (req, res) => {
     const { idfrom, idto } = req.body
@@ -167,10 +216,7 @@ exports.rightswipeupdate = (req, res) => {
                 })
             }
 
-
         })
-
-        console.log(users[1].rightSwipes)
 
         if(users[1].rightSwipes.includes(idto)){
             console.log("It's a match")
@@ -196,6 +242,91 @@ exports.rightswipeupdate = (req, res) => {
 
             })
         }
+
+        if(users[0].leftSwipes.includes(idto)){
+            console.log("remove left swipe")
+            User.updateOne({'_id': idfrom}, { '$pullAll' : { leftSwipes: idto} }, (err, users) => {
+                if(err){
+                    return res.status(400).json({
+                        error: "No user is found during update"
+                    })
+                }
+
+
+            })
+        }
+
+
+        // Send response
+        return res.json({
+            "status": "Success"
+        })
+    })
+}
+
+
+exports.leftswipeupdate = (req, res) => {
+    const { idfrom, idto } = req.body
+    let ids = [idfrom, idto]
+    User.find({'_id': { $in: ids}}, (err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        //update leftswipe of user 1
+        User.updateOne({'_id': idfrom}, { '$addToSet' : { leftSwipes: idto} }, (err, users) => {
+            if(err){
+                return res.status(400).json({
+                    error: "No user is found during update"
+                })
+            }
+
+        })
+
+
+        if(users[0].rightSwipes.includes(idto)){
+            console.log("remove right swipe")
+            User.updateOne({'_id': idfrom}, { '$pullAll' : { rightSwipes: idto} }, (err, users) => {
+                if(err){
+                    return res.status(400).json({
+                        error: "No user is found during update"
+                    })
+                }
+
+
+            })
+        }
+
+
+        // Send response
+        return res.json({
+            "status": "Success"
+        })
+    })
+}
+
+
+exports.unmatch = (req, res) => {
+    const { idfrom, idto } = req.body
+    let ids = [idfrom, idto]
+    User.find({'_id': { $in: ids}}, (err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        //update maches of user 1
+        User.updateOne({'_id': idfrom}, { '$pull' : { matches: idto, rightSwipes: idto} }, (err, users) => {
+            if(err){
+                return res.status(400).json({
+                    error: "No user is found during update"
+                })
+            }
+
+        })
 
 
         // Send response
