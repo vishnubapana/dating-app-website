@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import NavigationBarDashboard from "../NavigationBarDashboard"
 import TinderCards from '../tinderCards/TinderCards'
 import SwipeButtons from '../swipeButtons/SwipeButtons'
@@ -11,7 +11,7 @@ export function getCards() {
       .then(data => data.json())
 }
 
-const adminDashboard = () => {
+const AdminDashboard = () => {
     const [people, setPeople] = useState([]);
 
     useEffect(() => {
@@ -56,4 +56,4 @@ const adminDashboard = () => {
     )
 }
 
-export default adminDashboard;
+export default AdminDashboard;
