@@ -12,10 +12,11 @@ exports.signup = (req, res) => {
         })
     }
     const user = new User(req.body)
+    console.log(user);
     user.save((err, user) => {
         if(err){
             return res.status(400).json({
-                error: "Unable to add the user"
+                error: "Unable to add the user : " + err
             })
         }
 
@@ -71,6 +72,62 @@ exports.signout = (req, res) => {
     res.clearCookie('token')
     return res.json({
         message: "User signout successful"
+    })
+}
+
+exports.users = (req, res) => {
+    User.find({}, (err, user) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        // Send response
+        return res.json({
+            "status": "Success",
+            user: user
+        })
+    })
+}
+
+exports.getsingleuser = (req, res) => {
+    User.findOne({"_id": req.params.id}, (err, user) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        // Send response
+        return res.json({
+            "status": "Success",
+            user: user
+        })
+    })
+}
+
+exports.tindercards = (req, res) => {
+    User.find({}, (err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        var map = []
+
+        console.log(users)
+
+        
+        users.forEach(function(user) {
+            map.push({"name": user.name, "url": user.profileImgUrl})
+          })
+
+        // Send response
+        return res.json({
+            user: map
+        })
     })
 }
 

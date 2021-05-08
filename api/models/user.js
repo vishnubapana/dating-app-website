@@ -21,16 +21,28 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    token: {
-        type: String,
-        unique: true,
-        trim: true
-    },
     encry_password: {
         type: String,
         required: true
     },
     salt: String,
+    gender: {
+        type: String,
+        required: true
+    },
+    lookingfor: {
+        type: String,
+        required: true
+    },
+    birthday: { 
+        type: Date,
+        required: true,
+        trim: true
+    },
+    profileImgUrl: { 
+        type: String,
+        required: true
+    }
 }, {timestamps: true})
 
 

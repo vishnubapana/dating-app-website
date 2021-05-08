@@ -9,6 +9,7 @@ import Logout from './components/js/Logout';
 import PublicRoute from './components/utils/PublicRoute';
 import PrivateRoute from './components/utils/PrivateRoute';
 import { getToken } from './components/utils/Common';
+import UserProfile from './components/js/UserProfile';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <PublicRoute path='/sign-in' component={SignIn}/>
         <Route path='/sign-up' component={SignUp}/>
         <PrivateRoute path='/dashboard' component={Dashboard}/>
+        <PrivateRoute path='/userprofile' component={UserProfile}/>
         <PrivateRoute path='/logout' component={Logout}/>
       </Switch>
     </Router>
