@@ -9,14 +9,7 @@ export function getCards() {
 }
 
 const TinderCards = () => {
-  const [people, setPeople] = useState([{
-    url: "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    name: "ABC"
-  },
-  {
-    url: "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-    name: "sfsa"
-  }]);
+  const [people, setPeople] = useState([]);
 
   
 
@@ -32,6 +25,15 @@ const TinderCards = () => {
    return () => mounted = false;
  }, []);
 
+
+ const onSwipe = (direction) => {
+  console.log('You swiped: ' + direction)
+}
+ 
+const onCardLeftScreen = (myIdentifier) => {
+  console.log(myIdentifier + ' left the screen')
+}
+
   return (
     <div className="tinderCards">
       <div className="tinderCards__cardContainer">
@@ -40,6 +42,8 @@ const TinderCards = () => {
             key={person.name}
             className="swipe"
             preventSwipe={["up", "down"]}
+            onSwipe={onSwipe} 
+            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
           >
             <div
               style={{ backgroundImage: `url(${person.url})` }}
