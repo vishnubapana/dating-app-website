@@ -1,37 +1,55 @@
 import React from 'react';
 import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
-import {connect} from 'react-redux';
 import DefaultUserPic from "../../images/male.jpg";
+import { getUser } from '../utils/Common';
+import { storage } from '../utils/firebase'
+import NavigationBarDashboard from "./NavigationBarDashboard"
+
 const axios = require('axios');
+
 
 class MyProfile extends React.Component {
     constructor(props){
         super(props);
         this.state={
-            user_id:"608b7ef5959d6e02e442c1af",
-            username:this.props.username,
-            bio:this.props.bio,
-            profileImage:this.props.profileImage,
-            uploadedFile:null,
-            oppgender:this.props.oppgender,
-            gender:this.props.gender
+              user_id:"",
+              firstname:"",
+              lastname:"",
+              bio:"",
+              profileImgUrl:"",
+              gender:"",
+              genderM:"false",
+              genderF:"false",
+              genderN:"false",
+              lookingfor:"",
+              lookingforM:"false",
+              lookingforF:"false",
+              lookingforN:"false",
         }
     }
 
     fetchUserDetails=(user_id)=>{
-        //console.log(user_id);
-        // axios.get("http://localhost:3000/videos/"+_id,{
-            axios.get("http://localhost:5000/videos/608b7ef5959d6e02e442c1af",{
+            axios.get("http://localhost:8000/api/users/"+user_id,{
             headers: {
                 "content-type": "application/json"
               }
         }).then(res=>{
+            console.log("Fetch results");
             console.log(res);
-            this.setState({username:res.data.username});
-            this.setState({bio:res.data.Bio});
-            // this.setState({profileImage:res.data.results[0].profileImage})
+            this.setState({user_id:res.data.user_id});
+            this.setState({firstname:res.data.user.name});
+            this.setState({lastname:res.data.user.lastname});
+            this.setState({gender:res.data.user.gender});
+            this.setState({lookingfor:res.data.user.lookingfor});
+            this.setState({profileImgUrl:res.data.user.profileImgUrl});
+            this.radioconditions1();
+            this.radioconditions2();
+            console.log("State:")
+            console.log(this.state)
         })
         .catch(err=>console.log(err))
+        // this.radioconditions1();
+        
     }
 
     changeProfileImage=(event)=>{
@@ -41,153 +59,187 @@ class MyProfile extends React.Component {
     }
 
     componentDidMount(){
-        this.fetchUserDetails(this.state.user_id);
+        var user_id=getUser()._id;
+        console.log(user_id);
+        this.fetchUserDetails(user_id);
        }
 
     UpdateProfileHandler=(e)=>{
         e.preventDefault();
-        //create object of form data
         const formData=new FormData(e.target);
-        // formData.append("profileImage",this.state.uploadedFile);
         formData.append("user_id",this.state.user_id);
-        // formData.append("username",this.state.username);
-        // formData.append("bio",this.state.bio);
         console.log("Formdata");
         console.log(JSON.stringify(formData));
-        //update-profile
-        axios.put("http://localhost:5000/videos/"+this.state.user_id,formData,{
+        axios.put("http://localhost:5000/api/signin"+this.state.user_id,formData,{
             headers: {
                 "content-type": "application/json"
               }
         }).then(res=>{
             console.log(res);
-           this.setState({profileImage:res.data.results.profileImage});
+          //  this.setState({profileImage:res.data.results.profileImage});
         })
         .catch(err=>console.log(err))
     }
 
+//     handleSubmit = async e => {
+//       e.preventDefault();
+//   const uploadTask = storage.ref('images/' + email + '/' + fileName).put(file);
+//   uploadTask.on(
+//   "state_changed",
+//   snapshot => { },
+//   error => {
+//     console.log(error);
+//   },
+//   () => {
+//     storage
+//       .ref("images")
+//       .child(email)
+//       .child(fileName)
+//       .getDownloadURL()
+//       .then(url => {
+//         console.log(url);
+//         setImageUrl(url);
+//         UpdateProfileHandler({
+//           name,
+//           lastname,
+//           email,
+//           password,
+//           gender,
+//           lookingfor,
+//           birthday,
+//           "profileImgUrl": url
+//         }, props);
+//       });
+//   }
+// );
+// }
+
     handleInputChange = (e) => {
-      // let nam = e.target.name;
-      // let val = e.target.value;
-      // this.setState({[nam]: val});
       console.log("Input changed")
     }
 
+    handleLookingFor = (event) => {
+      console.log("Looking for changed")
+    }
+
+    radioconditions1(){
+      if(this.state.gender=="male"){
+        this.setState({genderM:"true"});
+      }
+      else if(this.state.gender=="female"){
+        this.setState({genderF:"true"});
+      }
+      else if(this.state.gender=="notsure"){
+        this.setState({genderN:"true"});
+      }
+    }
+    radioconditions2(){
+      if(this.state.lookingfor=='male'){
+        this.state.lookingforM='true'
+      }
+      else if(this.state.lookingfor=='female'){
+        this.state.lookingforF='true'
+      }
+      else if(this.state.lookingfor=="notsure"){
+        this.state.lookingforN='true'
+      }
+
+    }
 
 render(){
     const imagestyle = {
         width: "100%", height: "100%"
     }
-    if(this.state.profileImage){
-        var imagestr=this.state.profileImage;
-        console.log(imagestr);
-        imagestr = imagestr.replace("public/", "");
-        console.log("Imagestr"+imagestr);
-        var profilePic="http://localhost:5000/"+imagestr;
-    }else{
-         profilePic=DefaultUserPic;
-    }
-
     return (
-        <Container>
+        <div>
+          <NavigationBarDashboard />
         <Row>
        <Col>
-       <img src={profilePic} style={imagestyle} alt="profile pic" />
+       <img src={this.state.profileImgUrl} style={imagestyle} alt="profile pic" />
        </Col>
         <Col>
             <h1>User Profile</h1>
 
 
             <Form onSubmit={this.UpdateProfileHandler} className="form">     
-    <p>{this.state.msg}</p>
   <Form.Group controlId="formCategory1">
-    <Form.Label>Name</Form.Label>
-    <Form.Control type="text" name='username' defaultValue={this.state.username} onChange={this.handleInputChange} />
-  
+    <Form.Label>First Name</Form.Label>
+    <Form.Control type="text" name='firstname' value={this.state.firstname}  onChange={this.handleInputChange} />
+    <Form.Label>Last Name</Form.Label>
+    <Form.Control type="text" name='lastname' value={this.state.lastname} onChange={this.handleInputChange} />
   </Form.Group>
   <Form.Group controlId="formCategory2">
   <h6>Bio</h6>
-    {/* <Form.Label>Bio</Form.Label> */}
-    {/* <Form.Control as="textarea" rows={3} defaultValue={this.state.email} /> */}
     <Form.Control type="textarea" name='bio' defaultValue={this.state.bio} onChange={this.handleInputChange} />
   </Form.Group>
 
   <Form.Group controlId="formCategory3">
-      {/* <Form.Check 
-        type={type}
-        id={`default-${type}`}
-        label={`default ${type}`}
-      /> */}
-
       <h5>Gender</h5>
         <label>
           Male
           <input
-            name="genderM"
-            type="checkbox"
-            value="Male"
-            checked={this.state.gender}
-            // onChange={this.handleInputChange} 
+            id="gender1"
+            name="gender"
+            type="radio"
+            value="male"
+            checked={this.state.genderM}
+            onChange={this.handleInputChange} 
             />
         </label>
         <label>
           Female
           <input
-            name="genderF"
-            type="checkbox"
-            value="Female"
-            checked={this.state.gender}
-            // onChange={this.handleInputChange} 
+            id="gender2"
+            name="gender"
+            type="radio"
+            value="female"
+            checked={this.state.genderF}
+            onChange={this.handleInputChange} 
             />
         </label>
         <label>
           Other
           <input
-            name="genderO"
-            type="checkbox"
-            value="Other"
-            checked={this.state.gender}
-            // onChange={this.handleInputChange} 
+            id="gender3"
+            name="gender"
+            type="radio"
+            value="notsure"
+            checked={this.state.genderN}
+            onChange={this.handleInputChange} 
             />
         </label>
   </Form.Group>
 
   <Form.Group controlId="formCategory4">
-      {/* <Form.Check 
-        type={type}
-        id={`default-${type}`}
-        label={`default ${type}`}
-      /> */}
-
-      <h5> Preferred Opposite Gender</h5>
+      <h5> Looking For</h5>
         <label>
           Male
           <input
-            name="oppgenderM"
-            type="checkbox"
-            value="Male"
-            checked={this.state.oppgender}
-            // onChange={this.handleInputChange} 
+            name="lookingfor"
+            type="radio"
+            value="male"
+            checked={this.state.lookingforM}
+            onChange={this.handleInputChange}
             />
         </label>
         <label>
           Female
           <input
-            name="oppgenderF"
-            type="checkbox"
-            value="Female"
-            checked={this.state.oppgender}
-            // onChange={this.handleInputChange} 
+            name="lookingfor"
+            type="radio"
+            value="female"
+            checked={this.state.lookingforF}
+            onChange={this.handleInputChange} 
             />
         </label>
         <label>
-          Other
+          Both
           <input
-            name="oppgenderO"
-            type="checkbox"
-            value="Other"
-            checked={this.state.oppgender}
-            // onChange={this.handleInputChange} 
+            name="lookingfor"
+            type="radio"
+            value="notsure"
+            checked={this.state.lookingforN}
+            onChange={this.handleInputChange} 
             />
         </label>
   </Form.Group>
@@ -196,28 +248,14 @@ render(){
     <Form.Label>Profile Image</Form.Label>
     <Form.Control type="file" name="profileImage" onChange={this.changeProfileImage}/>
     </Form.Group>
-  {/* <Button variant="primary" onClick={this.UpdateProfileHandler}>Update Profile</Button> */}
   <Button type='submit'>Update Profile</Button>
   </Form>
    </Col>
 
        </Row>
-        </Container>
+        </div>
     )
 }
 }
 
-// const mapStatetoProps=(state)=>{
-//     return{
-//         user_id:state.user.userDetails.userid,
-//         username:state.user.userDetails.username,
-//        email:state.user.email,
-//        profileImage: state.user.profileImage,
-//        msg:state.user.msg
-//     }
-//    }
-   
-   
-
-//    export default connect(mapStatetoProps)(MyProfile);
  export default MyProfile;
