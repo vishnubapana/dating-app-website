@@ -53,14 +53,15 @@ exports.signin = (req, res) => {
         
 
         // Send response
-        const { _id, name, email } = user
+        const { _id, name, email, profileImgUrl } = user
         return res.json({
             "status": "Success",
             token,
             user: {
                 _id,
                 name,
-                email
+                email,
+                profileImgUrl
             }
         })
     })
@@ -127,6 +128,63 @@ exports.tindercards = (req, res) => {
         // Send response
         return res.json({
             user: map
+        })
+    })
+}
+
+
+exports.rightswipeupdate = (req, res) => {
+    const { idfrom, idto } = req.body
+    let ids = [idfrom, idto]
+    User.find({'_id': { $in: ids}}, (err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        //update rightswipe of user 1
+        User.updateOne({'_id': idfrom}, { '$addToSet' : { rightSwipes: idto} }, (err, users) => {
+            if(err){
+                return res.status(400).json({
+                    error: "No user is found during update"
+                })
+            }
+
+
+        })
+
+        console.log(users[1].rightSwipes)
+
+        if(users[1].rightSwipes.includes(idto)){
+            console.log("It's a match")
+            //update matches of user 1
+            User.updateOne({'_id': idfrom}, { '$addToSet' : { matches: idto} }, (err, users) => {
+                if(err){
+                    return res.status(400).json({
+                        error: "No user is found during update"
+                    })
+                }
+
+
+            })
+
+            //update matches of user 2
+            User.updateOne({'_id': idto}, { '$addToSet' : { matches: idfrom} }, (err, users) => {
+                if(err){
+                    return res.status(400).json({
+                        error: "No user is found during update"
+                    })
+                }
+
+
+            })
+        }
+
+
+        // Send response
+        return res.json({
+            "status": "Success"
         })
     })
 }

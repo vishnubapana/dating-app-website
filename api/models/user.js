@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
         maxlength: 32,
         trim: true
     },
-
     lastname: {
         type: String,
         maxlength: 32,
@@ -42,6 +41,18 @@ const userSchema = new mongoose.Schema({
     profileImgUrl: { 
         type: String,
         required: true
+    },
+    matches: {
+        type: Array,
+        "default" : []
+    },
+    rightSwipes: {
+        type: Array,
+        "default" : []
+    },
+    leftSwipes: {
+        type: Array,
+        "default" : []
     }
 }, {timestamps: true})
 
