@@ -2,6 +2,7 @@ import React from 'react';
 import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
 import { getUser } from '../utils/Common';
 import NavigationBarDashboard from "./NavigationBarDashboard"
+import { storage } from '../utils/firebase'
 
 const axios = require('axios');
 
