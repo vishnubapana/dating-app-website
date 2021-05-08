@@ -21,11 +21,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    token: {
-        type: String,
-        unique: true,
-        trim: true
-    },
     encry_password: {
         type: String,
         required: true

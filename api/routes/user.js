@@ -1,5 +1,5 @@
 const express = require("express")
-const { signup, signin, signout, updatetoken, users } = require("../controllers/user")
+const { signup, signin, signout, users, getsingleuser, tindercards } = require("../controllers/user")
 const { check } = require("express-validator")
 const router = express.Router()
 
@@ -17,5 +17,9 @@ router.get('/signout', signout)
 // router.post('/updatetoken', updatetoken)
 
 router.get('/users', users)
+
+router.get('/users/:id', getsingleuser)
+
+router.get('/tindercards', tindercards)
 
 module.exports = router
