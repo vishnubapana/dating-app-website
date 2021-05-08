@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import '../css/home.css'
 import '../css/index.css'
+import { getUser } from '../utils/Common'
 import { storage } from '../utils/firebase'
 import NavigationBarSignUp from './NavigationBarSignUp'
 
@@ -30,7 +31,7 @@ function signupUser(credentials, props) {
 
 
    function handleFileUpload(props) {
-	const uploadTask = storage.ref('images/' + props.email + '/' + props.fileName).put(props.file);
+	const uploadTask = storage.ref('images/' + getUser()._id + '/' + props.fileName).put(props.file);
 	uploadTask.on(
 		"state_changed",
 		snapshot => { },
@@ -40,7 +41,7 @@ function signupUser(credentials, props) {
 		() => {
 			storage
 				.ref("images")
-				.child(props.email)
+				.child(getUser()._id)
 				.child(props.fileName)
 				.getDownloadURL()
 				.then(url => {
