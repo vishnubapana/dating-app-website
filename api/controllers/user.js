@@ -12,6 +12,7 @@ exports.signup = (req, res) => {
         })
     }
     const user = new User(req.body)
+    console.log(user);
     user.save((err, user) => {
         if(err){
             return res.status(400).json({
@@ -71,6 +72,22 @@ exports.signout = (req, res) => {
     res.clearCookie('token')
     return res.json({
         message: "User signout successful"
+    })
+}
+
+exports.users = (req, res) => {
+    User.findOne({}, (err, user) => {
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        // Send response
+        return res.json({
+            "status": "Success",
+            user: user
+        })
     })
 }
 

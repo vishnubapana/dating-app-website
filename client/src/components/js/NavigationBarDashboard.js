@@ -44,7 +44,13 @@ function NavigationBarDashboard() {
                         </li>
                         <li className='nav-item'>
                             <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
-                                Services
+                                My Services
+                        </Link>
+                        </li>
+
+                        <li className='nav-item'>
+                            <Link to='/userprofile' className='nav-links' onClick={closeMobileMenu}>
+                                My Profile
                         </Link>
                         </li>
                         <li className='nav-item'>

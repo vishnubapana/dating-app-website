@@ -42,21 +42,6 @@ function SignIn(props) {
             email,
             password,
         }, props);
-
-    //     fetch('http://localhost:8000/api/signin', {
-    //     method: 'POST',
-    //     headers: {
-    //     'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({email, password})
-    // })
-    //   .then(data => data.json())
-    //   .then((data) => {
-    //       if(data.status == "Success"){
-    //             // props.setToken(data.token);
-    //             props.history.push("/dashboard");
-    //       }
-    //   })
         
     }
 

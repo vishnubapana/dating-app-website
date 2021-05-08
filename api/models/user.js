@@ -31,6 +31,23 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     salt: String,
+    gender: {
+        type: String,
+        required: true
+    },
+    lookingfor: {
+        type: String,
+        required: true
+    },
+    birthday: { 
+        type: Date,
+        required: true,
+        trim: true
+    },
+    profileImgUrl: { 
+        type: String,
+        required: true
+    }
 }, {timestamps: true})
 
 

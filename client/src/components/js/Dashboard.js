@@ -1,11 +1,12 @@
 import React from 'react'
 import NavigationBarDashboard from "./NavigationBarDashboard"
+import TinderCards from './tinderCards/TinderCards'
 
 function Dashboard() {
     return (
         <>
         <NavigationBarDashboard/>
-            <h1>Dashboard</h1>
+        <TinderCards />
         </>
     )
 }
