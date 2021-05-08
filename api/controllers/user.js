@@ -3,6 +3,8 @@ const { validationResult } = require("express-validator")
 var jwt = require("jsonwebtoken")
 var expressJwt = require("express-jwt")  
 
+// mongoose.set('useFindAndModify', false);
+
 exports.signup = (req, res) => {
     const errors = validationResult(req)
 
@@ -131,7 +133,34 @@ exports.tindercards = (req, res) => {
     })
 }
 
+exports.updateprofile=(req,res)=> {
+    console.log("Req body is:")
+    console.log(req)
+    const errors = validationResult(req)
 
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            error: errors.array()[0].msg
+        })
+    }
+    let data = req.body
+    // console.log(user);
+    const filter= req.params.id;
+    // console.log(data);
+    User.updateOne({'_id':filter},{ '$set': {name:data.name, lastname: data.lastname,bio:data.bio, profileImgUrl:data.profileImgUrl}}, function(err, data){
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        // Send response
+        return res.json({
+            "status": "User updated successfully",
+            data: data
+        })
+    });
+}
 // exports.updatetoken = (req, res) => {
 //     const { email, token } = req.body
 
