@@ -30,4 +30,7 @@ router.post('/leftswipe', leftswipeupdate)
 
 router.post('/unmatch', unmatch)
 
+router.put('/users/:id', updateprofile)
+
+
 module.exports = router

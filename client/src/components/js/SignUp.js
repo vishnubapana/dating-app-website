@@ -98,6 +98,7 @@ function SignUp(props) {
 	}
 
 	const handleFileSelection = (event) => {
+		console.log("File values")
 		console.log(event.target.files[0]);
 		setFile(event.target.files[0]);
 		setFileName(event.target.files[0].name);
