@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema({
     profileImgUrl: { 
         type: String,
         required: true
+    },
+    isAdmin: {
+        type: Number,
+        default: 0
     }
 }, {timestamps: true})
 

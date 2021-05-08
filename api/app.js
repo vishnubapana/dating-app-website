@@ -39,5 +39,5 @@ const port = process.env.PORT || 8000
 
 //starting a server
 app.listen(port, () => {
-    console.log('App is running at ${port}')
+    console.log(`App is running at ${port}`)
 })
