@@ -22,7 +22,6 @@ async function loginUser(credentials, props) {
               setUserSession(data.token, data.user);
               props.history.push("/dashboard");
           }else{
-<<<<<<< HEAD
               var element = document.getElementById("error");
               element.classList.remove("error-hidden");
               element.innerText = data.error;
@@ -32,13 +31,6 @@ async function loginUser(credentials, props) {
           var element = document.getElementById("error");
           element.classList.remove("error-hidden");
           element.innerText = error.error;
-=======
-            console.log(data);
-          }
-      })
-      .catch((error) => {
-          console.log(error);
->>>>>>> ce51d71f9c76e3fb5c00eb42975f270ae3d043ce
       })
    }
 
@@ -54,10 +46,6 @@ function SignIn(props) {
             email,
             password,
         }, props);
-<<<<<<< HEAD
-=======
-        
->>>>>>> ce51d71f9c76e3fb5c00eb42975f270ae3d043ce
     }
 
     return (
@@ -83,17 +71,10 @@ function SignIn(props) {
                                 <input type="password" name="password" id="password" className="form-control"
                                     placeholder="Password" onChange={e => setPassword(e.target.value)}/>
                             </div>
-<<<<<<< HEAD
                             <p className="error error-hidden" id="error"></p>
                             <button type="submit" className="btn btn-success btn-lg btn-block center">Sign in</button>
                         </form>
                         <div className="text-center">Don't have an account?<Link to='/sign-up'>Sign up</Link></div>
-=======
-                            <p className="error error-hidden"></p>
-                            <button type="submit" className="btn btn-success btn-lg btn-block center">Sign in</button>
-                        </form>
-                        <div className="text-center">Don't have an account? <Link to='/sign-up'>Sign up</Link></div>
->>>>>>> ce51d71f9c76e3fb5c00eb42975f270ae3d043ce
                     </div>
                 </div>
             </div>
