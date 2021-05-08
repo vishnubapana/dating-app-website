@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
         maxlength: 32,
         trim: true
     },
-
     lastname: {
         type: String,
         maxlength: 32,
@@ -46,6 +45,18 @@ const userSchema = new mongoose.Schema({
     isAdmin: {
         type: Number,
         default: 0
+    },
+    matches: {
+        type: Array,
+        "default" : []
+    },
+    rightSwipes: {
+        type: Array,
+        "default" : []
+    },
+    leftSwipes: {
+        type: Array,
+        "default" : []
     }
 }, {timestamps: true})
 
