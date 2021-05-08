@@ -1,8 +1,6 @@
 import React from 'react';
 import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
-import DefaultUserPic from "../../images/male.jpg";
 import { getUser } from '../utils/Common';
-import { storage } from '../utils/firebase'
 import NavigationBarDashboard from "./NavigationBarDashboard"
 
 const axios = require('axios');

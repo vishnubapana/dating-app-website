@@ -9,11 +9,14 @@ const userSchema = new mongoose.Schema({
         maxlength: 32,
         trim: true
     },
-
     lastname: {
         type: String,
         maxlength: 32,
         trim: true
+    },
+    bio: {
+        type: String,
+        default: ""
     },
     email: {
         type: String,
@@ -42,6 +45,22 @@ const userSchema = new mongoose.Schema({
     profileImgUrl: { 
         type: String,
         required: true
+    },
+    isAdmin: {
+        type: Number,
+        default: 0
+    },
+    matches: {
+        type: Array,
+        "default" : []
+    },
+    rightSwipes: {
+        type: Array,
+        "default" : []
+    },
+    leftSwipes: {
+        type: Array,
+        "default" : []
     }
 }, {timestamps: true})
 

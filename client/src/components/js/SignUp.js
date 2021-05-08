@@ -21,11 +21,15 @@ function signupUser(credentials, props) {
             //   setUserSession(data.token, data.user);
               props.history.push("/sign-in");
           }else{
-            console.log(data);
+              var element = document.getElementById("error");
+              element.classList.remove("error-hidden");
+              element.innerText = data.error;
           }
       })
       .catch((error) => {
-          console.log(error);
+		var element = document.getElementById("error");
+		element.classList.remove("error-hidden");
+		element.innerText = error.error;
       })
    }
 
@@ -194,7 +198,7 @@ function SignUp(props) {
 						<img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} width={file ? "100px" : "0Px"} height={file ? "100px" : "0px"} />
 					</div>
 					<div className="form-group">
-						<p className="error error-hidden"></p>
+						<p className="error error-hidden" id="error"></p>
 						<button type="submit" className="btn btn-success btn-lg btn-block center" id="btnSignUp">Register
 						Now</button>
 					</div>

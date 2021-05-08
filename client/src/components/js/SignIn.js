@@ -22,11 +22,15 @@ async function loginUser(credentials, props) {
               setUserSession(data.token, data.user);
               props.history.push("/dashboard");
           }else{
-            console.log(data);
+              var element = document.getElementById("error");
+              element.classList.remove("error-hidden");
+              element.innerText = data.error;
           }
       })
       .catch((error) => {
-          console.log(error);
+          var element = document.getElementById("error");
+          element.classList.remove("error-hidden");
+          element.innerText = error.error;
       })
    }
 
@@ -42,7 +46,6 @@ function SignIn(props) {
             email,
             password,
         }, props);
-        
     }
 
     return (
@@ -68,10 +71,10 @@ function SignIn(props) {
                                 <input type="password" name="password" id="password" className="form-control"
                                     placeholder="Password" onChange={e => setPassword(e.target.value)}/>
                             </div>
-                            <p className="error error-hidden"></p>
+                            <p className="error error-hidden" id="error"></p>
                             <button type="submit" className="btn btn-success btn-lg btn-block center">Sign in</button>
                         </form>
-                        <div className="text-center">Don't have an account? <Link to='/sign-up'>Sign up</Link></div>
+                        <div className="text-center">Don't have an account?<Link to='/sign-up'>Sign up</Link></div>
                     </div>
                 </div>
             </div>

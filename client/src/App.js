@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import NavigationBar from './components/js/NavigationBar';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import SignIn from './components/js/SignIn'
@@ -8,14 +8,24 @@ import Dashboard from './components/js/Dashboard';
 import Logout from './components/js/Logout';
 import PublicRoute from './components/utils/PublicRoute';
 import PrivateRoute from './components/utils/PrivateRoute';
-import { getToken } from './components/utils/Common';
+import { getUser } from './components/utils/Common';
 import UserProfile from './components/js/UserProfile';
 import MyProfile from './components/js/MyProfile';
+import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
 
-function App() {
+ // GET USER INFORMATION FROM DATABASE SHOWING 1 FOR TRUE AND 0 FOR FALSE
+
+function App(token) {
 
   const [authLoading, setAuthLoading] = useState(true);
 
+  const [isAdmin, setIsAdmin] = useState([]);
+
+
+  useEffect(() => {
+    setIsAdmin(getUser().isAdmin)
+
+  }, [])
   // if(authLoading && getToken()){
   //   return <div className="content">Checking Authentication...</div>
   // }
@@ -27,7 +37,7 @@ function App() {
   //   }
   // }, [input])
 
-  
+
   return (
     <Router>
       <Switch>
@@ -36,7 +46,7 @@ function App() {
         </Route>
         <PublicRoute path='/sign-in' component={SignIn}/>
         <Route path='/sign-up' component={SignUp}/>
-        <PrivateRoute path='/dashboard' component={Dashboard}/>
+        <PrivateRoute path='/dashboard' component={isAdmin ? AdminDashboard: Dashboard}/>
         <PrivateRoute path='/userprofile' component={MyProfile}/>
         <PrivateRoute path='/logout' component={Logout}/>
       </Switch>
