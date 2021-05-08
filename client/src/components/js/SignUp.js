@@ -21,11 +21,23 @@ function signupUser(credentials, props) {
             //   setUserSession(data.token, data.user);
               props.history.push("/sign-in");
           }else{
+<<<<<<< HEAD
+              var element = document.getElementById("error");
+              element.classList.remove("error-hidden");
+              element.innerText = data.error;
+          }
+      })
+      .catch((error) => {
+		var element = document.getElementById("error");
+		element.classList.remove("error-hidden");
+		element.innerText = error.error;
+=======
             console.log(data);
           }
       })
       .catch((error) => {
           console.log(error);
+>>>>>>> ce51d71f9c76e3fb5c00eb42975f270ae3d043ce
       })
    }
 
@@ -194,7 +206,11 @@ function SignUp(props) {
 						<img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} width={file ? "100px" : "0Px"} height={file ? "100px" : "0px"} />
 					</div>
 					<div className="form-group">
+<<<<<<< HEAD
+						<p className="error error-hidden" id="error"></p>
+=======
 						<p className="error error-hidden"></p>
+>>>>>>> ce51d71f9c76e3fb5c00eb42975f270ae3d043ce
 						<button type="submit" className="btn btn-success btn-lg btn-block center" id="btnSignUp">Register
 						Now</button>
 					</div>
