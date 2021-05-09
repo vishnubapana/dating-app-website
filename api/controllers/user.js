@@ -159,7 +159,7 @@ exports.tinderfilteredcards = (req, res) => {
             })
         }
 
-        filteredIds = filteredIds.concat(passedUser.leftSwipes)
+        // filteredIds = filteredIds.concat(passedUser.leftSwipes)
         filteredIds = filteredIds.concat(passedUser.rightSwipes)
     });
     User.find({}, (err, users) => {
