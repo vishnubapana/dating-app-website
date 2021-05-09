@@ -23,7 +23,7 @@ body {
 }
 
 /* Remove extra left and right margins, due to padding */
-.row {
+.rowlen {
   width: 30%;
   height: 30%;
   margin: 0 -5px;

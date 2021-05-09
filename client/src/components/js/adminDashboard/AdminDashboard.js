@@ -5,7 +5,7 @@ import NavigationBarDashboard from "../NavigationBarDashboard"
 import EditProfile from '../EditProfile'
 import TinderCards from '../tinderCards/TinderCards'
 import SwipeButtons from '../swipeButtons/SwipeButtons'
-// import "./admin.css"
+import "./admin.css"
 import axios from "axios"
 
 
@@ -40,11 +40,11 @@ const AdminDashboard = () => {
         <>
             <NavigationBarDashboard/>
             {people.map((person) => (
-                <div key={person._id}>
+                <div key={person._id} className = "thisbody">
                     <div className = "column">
-                        <div>
+                        <div className = "rowlen">
                             <div className="card" style={{backgroundImage: `url(${person.profileImgUrl})`}}>
-                                <h3>{person.name}</h3>
+                                <h3 className="h3">{person.name}</h3>
                                 <Link key ={person._id} to='/editProfile' className="btn btn-primary b1" >Edit</Link>
                                 <Link to="/userprofile" className="btn btn-primary b2">Delete</Link>
                             </div>
