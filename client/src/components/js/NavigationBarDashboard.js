@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import '../css/NavigationBar.css'
+import '../css/NavigationBarNew.css'
 
 
 function NavigationBarDashboard() {
@@ -51,6 +51,11 @@ function NavigationBarDashboard() {
                         <li className='nav-item'>
                             <Link to='/userprofile' className='nav-links' onClick={closeMobileMenu}>
                                 My Profile
+                        </Link>
+                        </li>
+                        <li className='nav-item'>
+                            <Link to='/mymatches' className='nav-links' onClick={closeMobileMenu}>
+                                My Matches
                         </Link>
                         </li>
                         <li className='nav-item'>
