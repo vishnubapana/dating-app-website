@@ -4,9 +4,13 @@ const { check } = require("express-validator")
 const router = express.Router()
 
 router.post('/signup', [
-    check("name", "Name atleast should be 3 characters").isLength({ min: 3}),
+    check("name", "Enter valid name").not().isEmpty(),
+    check("name", "Enter name with more than 3 characters").isLength({ min: 3}),
     check("email", "Email should be valid").isEmail(),
-    check("password", "Password at least should be 6 characters").isLength({ min: 6})
+    check("password", "Password at least should be 6 characters").isLength({ min: 6}),
+    check('gender', "Select your gender").not().isEmpty(),
+    check('lookingfor', "Select who you are looking for").not().isEmpty(),
+    check('birthday', "Enter your birthday").not().isEmpty()
 ], signup)
 
 

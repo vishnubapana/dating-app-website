@@ -152,50 +152,50 @@ function SignUp(props) {
 					<div className="form-group">
 						<div className="row">
 							<div className="col"><input type="text" className="form-control" name="first_name"
-								placeholder="First Name" id="first_name" onChange={handleFirstName}/></div>
+								placeholder="First Name" id="first_name" onChange={handleFirstName}  required/></div>
 							<div className="col"><input type="text" className="form-control" name="last_name"
-								placeholder="Last Name" id="last_name" onChange={handleLastName}/></div>
+								placeholder="Last Name" id="last_name" onChange={handleLastName}  required/></div>
 						</div>
 					</div>
 					<div className="form-group">
-						<input type="email" className="form-control" name="email" placeholder="Email" id="email" onChange={handleEmail}/>
+						<input type="email" className="form-control" name="email" placeholder="Email" id="email" onChange={handleEmail}  required/>
 					</div>
 					<div className="form-group">
-						<input type="password" className="form-control" name="password" placeholder="Password" id="password" onChange={handlePassword}/>
+						<input type="password" className="form-control" name="password" placeholder="Password" id="password" onChange={handlePassword}  required/>
 					</div>
 					<label for="gender">Gender</label>
 					<div className="form-group">
 						<div className="form-check form-check-inline">
-							<input className="form-check-input" type="radio" name="inlineRadioGender" id="inlineRadio1" value="male" checked={gender == "male"} onChange={handleGender}/>
+							<input className="form-check-input" type="radio" name="inlineRadioGender" id="inlineRadio1" value="male" checked={gender == "male"} onChange={handleGender} required/>
 							<label className="form-check-label" for="inlineRadio1">Male</label>
 						</div>
 						<div className="form-check form-check-inline">
-							<input className="form-check-input" type="radio" name="inlineRadioGender" id="inlineRadio2" value="female" checked={gender == "female"} onChange={handleGender}/>
+							<input className="form-check-input" type="radio" name="inlineRadioGender" id="inlineRadio2" value="female" checked={gender == "female"} onChange={handleGender} required/>
 							<label className="form-check-label" for="inlineRadio2">Female</label>
 						</div>
 					</div>
 					<label for="lookingfor">Looking For</label>
 					<div className="form-group">
 						<div className="form-check form-check-inline">
-							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio4" value="male" checked={lookingfor == "male"} onChange={handleLookingFor}/>
+							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio4" value="male" checked={lookingfor == "male"} onChange={handleLookingFor} required/>
 							<label className="form-check-label" for="inlineRadio1">Male</label>
 						</div>
 						<div className="form-check form-check-inline">
-							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio5" value="female" checked={lookingfor == "female"} onChange={handleLookingFor}/>
+							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio5" value="female" checked={lookingfor == "female"} onChange={handleLookingFor} required/>
 							<label className="form-check-label" for="inlineRadio2">Female</label>
 						</div>
 						<div className="form-check form-check-inline">
-							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio6" value="notsure" checked={lookingfor == "notsure"} onChange={handleLookingFor}/>
+							<input className="form-check-input" type="radio" name="inlineRadioLookingFor" id="inlineRadio6" value="notsure" checked={lookingfor == "notsure"} onChange={handleLookingFor} required/>
 							<label className="form-check-label" for="inlineRadio3">Both</label>
 						</div>
 					</div>
 					<div className="form-group">
 						<label for="dateofbirth">Date Of Birth</label>
-						<input className="form-control" type="date" id="example-date-input" onChange={handleDob}></input>
+						<input className="form-control" type="date" id="example-date-input" onChange={handleDob} required></input>
 					</div>
 					<div className="form-group">
 						<label for="picture">Select your picture</label>
-						<input type="file" className="form-control-file" name="picture" onChange={handleFileSelection} />
+						<input type="file" className="form-control-file" name="picture" onChange={handleFileSelection} required/>
 						<img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} width={file ? "100px" : "0Px"} height={file ? "100px" : "0px"} />
 					</div>
 					<div className="form-group">
