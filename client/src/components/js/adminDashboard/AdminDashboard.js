@@ -3,7 +3,9 @@ import {Link, useHistory} from 'react-router-dom'
 import { Route } from "react-router";
 import NavigationBarDashboard from "../NavigationBarDashboard"
 import EditProfile from '../EditProfile'
-import "./admin.css"
+import TinderCards from '../tinderCards/TinderCards'
+import SwipeButtons from '../swipeButtons/SwipeButtons'
+// import "./admin.css"
 import axios from "axios"
 
 
