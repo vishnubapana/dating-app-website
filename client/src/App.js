@@ -9,7 +9,6 @@ import Logout from './components/js/Logout';
 import PublicRoute from './components/utils/PublicRoute';
 import PrivateRoute from './components/utils/PrivateRoute';
 import { getUser } from './components/utils/Common';
-import UserProfile from './components/js/UserProfile';
 import EditProfile from './components/js/EditProfile';
 import MyProfile from './components/js/MyProfile';
 import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
@@ -21,13 +20,13 @@ function App(token) {
 
   const [authLoading, setAuthLoading] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState();
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     setIsAdmin(getUser().isAdmin)
 
-  }, [])*/
+  }, [isAdmin])
   // if(authLoading && getToken()){
   //   return <div className="content">Checking Authentication...</div>
   // }

@@ -152,6 +152,7 @@ exports.tindercards = (req, res) => {
 exports.tinderfilteredcards = (req, res) => {
 
     var filteredIds = []
+    let passedUserLookingFor = "female"
     User.findOne({'_id': req.params.id}, (err, passedUser) => {
         if(err){
             return res.status(400).json({
@@ -161,6 +162,7 @@ exports.tinderfilteredcards = (req, res) => {
 
         // filteredIds = filteredIds.concat(passedUser.leftSwipes)
         filteredIds = filteredIds.concat(passedUser.rightSwipes)
+        passedUserLookingFor = passedUser.lookingfor
     });
     User.find({}, (err, users) => {
         if(err){
@@ -172,7 +174,7 @@ exports.tinderfilteredcards = (req, res) => {
         var map = []
 
         users.forEach(function(user) {
-            if(user._id != req.params.id && !filteredIds.includes(''+user._id)){
+            if(user._id != req.params.id && !filteredIds.includes(''+user._id) && user.gender == passedUserLookingFor){
                 map.push({"_id": user._id, "name": user.name, "url": user.profileImgUrl})
             }
             

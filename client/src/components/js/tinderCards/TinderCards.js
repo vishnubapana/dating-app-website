@@ -10,6 +10,7 @@ export function getCards() {
 }
 
 
+
 function rightSwipe(userId) {
   return fetch('http://localhost:8000/api/rightswipe', {
     method: 'POST',
