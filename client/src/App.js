@@ -24,7 +24,10 @@ function App(token) {
 
 
   useEffect(() => {
-    setIsAdmin(getUser().isAdmin)
+    if(getUser() != null){
+      setIsAdmin(getUser().isAdmin)
+    }
+    
 
   }, [isAdmin])
   // if(authLoading && getToken()){

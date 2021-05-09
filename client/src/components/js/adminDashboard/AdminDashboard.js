@@ -5,8 +5,25 @@ import NavigationBarDashboard from "../NavigationBarDashboard"
 import EditProfile from '../EditProfile'
 import TinderCards from '../tinderCards/TinderCards'
 import SwipeButtons from '../swipeButtons/SwipeButtons'
+import { makeStyles } from '@material-ui/core/styles';
 // import "./admin.css"
 import axios from "axios"
+import {
+    Grid,
+    Card,
+    CardContent,
+    Button,
+    CardHeader,
+    Box,
+    CardMedia
+  } from "@material-ui/core/";
+  
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      padding: theme.spacing(2)
+    }
+  }));
 
 
 
@@ -16,6 +33,7 @@ export function getCards() {
   }
 
 const AdminDashboard = () => {
+    const classes = useStyles();
     const [people, setPeople] = useState([])
     useEffect(() => {
         let mounted = true;
@@ -39,7 +57,7 @@ const AdminDashboard = () => {
     return (
         <>
             <NavigationBarDashboard/>
-            {people.map((person) => (
+            {/* {people.map((person) => (
                 <div key={person._id}>
                     <div className = "column">
                         <div>
@@ -52,7 +70,57 @@ const AdminDashboard = () => {
                     </div>
                 </div>
                 
-            ))}
+            ))} */}
+
+
+<div className={classes.root}>
+        <Grid
+          container
+          spacing={3}
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
+          {people.map((person) => (
+            <Grid item xs={4} key={person._id}>
+              <Card>
+                <CardHeader
+                  title={`Name : ${person.name}`}
+                  subheader={`Bio : ${person.bio}`}
+                />
+                <CardContent>
+                  <CardMedia
+                    component="img"
+                    className='mediastyle'
+                    image={person.profileImgUrl}
+                    height="200px"
+                    width="500px"
+                  />
+                  <br></br>
+
+                  <Box align='center' display="flex" justifyContent="space-between">
+                    <Button
+                      color='primary'
+                      size='large'
+                      variant='contained'
+                    >
+                      Edit Profile
+    </Button>
+                    <Button
+                      color='primary'
+                      size='large'
+                      variant='contained'
+                    >
+                      Delete
+    </Button></Box>
+
+                </CardContent>
+
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
         </>
     )
 }
