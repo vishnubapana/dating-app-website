@@ -173,7 +173,7 @@ exports.tinderfilteredcards = (req, res) => {
 
         users.forEach(function(user) {
             if(user._id != req.params.id && !filteredIds.includes(''+user._id)){
-                map.push({"name": user.name, "url": user.profileImgUrl})
+                map.push({"_id": user._id, "name": user.name, "url": user.profileImgUrl})
             }
             
           })
@@ -189,6 +189,7 @@ exports.tinderfilteredcards = (req, res) => {
 exports.rightswipeupdate = (req, res) => {
     const { idfrom, idto } = req.body
     let ids = [idfrom, idto]
+    let resultMessage = "Success"
     User.find({'_id': { $in: ids}}, (err, users) => {
         if(err){
             return res.status(400).json({
@@ -206,8 +207,10 @@ exports.rightswipeupdate = (req, res) => {
 
         })
 
-        if(users[1].rightSwipes.includes(idto)){
+
+        if(users[1].rightSwipes.includes(idfrom)){
             console.log("It's a match")
+            resultMessage = "Match"
             //update matches of user 1
             User.updateOne({'_id': idfrom}, { '$addToSet' : { matches: idto} }, (err, users) => {
                 if(err){
@@ -247,7 +250,7 @@ exports.rightswipeupdate = (req, res) => {
 
         // Send response
         return res.json({
-            "status": "Success"
+            "message": resultMessage
         })
     })
 }
@@ -290,7 +293,7 @@ exports.leftswipeupdate = (req, res) => {
 
         // Send response
         return res.json({
-            "status": "Success"
+            "message": "Success"
         })
     })
 }
