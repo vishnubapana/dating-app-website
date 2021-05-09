@@ -12,6 +12,7 @@ import EditProfile from './components/js/EditProfile';
 import MyProfile from './components/js/MyProfile';
 import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
 import Matches from './components/js/Matches';
+import { getUser } from './components/utils/Common';
 
  // GET USER INFORMATION FROM DATABASE SHOWING 1 FOR TRUE AND 0 FOR FALSE
 
