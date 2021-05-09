@@ -13,6 +13,7 @@ import UserProfile from './components/js/UserProfile';
 import EditProfile from './components/js/EditProfile';
 import MyProfile from './components/js/MyProfile';
 import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
+import Matches from './components/js/Matches';
 
  // GET USER INFORMATION FROM DATABASE SHOWING 1 FOR TRUE AND 0 FOR FALSE
 
@@ -20,7 +21,7 @@ function App(token) {
 
   const [authLoading, setAuthLoading] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
 
   /*useEffect(() => {
@@ -50,6 +51,7 @@ function App(token) {
         <PrivateRoute path='/dashboard' component={isAdmin ? AdminDashboard: Dashboard}/>
         <PrivateRoute path='/userprofile' component={MyProfile}/>
         <PrivateRoute path='/editprofile' component={EditProfile}/>
+        <PrivateRoute path='/mymatches' component={Matches}/>
         <PrivateRoute path='/logout' component={Logout}/>
       </Switch>
     </Router>
