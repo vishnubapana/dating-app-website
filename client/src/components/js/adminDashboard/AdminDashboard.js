@@ -6,20 +6,20 @@ import "./admin.css"
 import axios from "axios"
 
 
+
 export function getCards() {
-    return fetch('http://localhost:8000/api/tindercards')
+    return fetch('http://localhost:8000/api/users')
       .then(data => data.json())
-}
+  }
 
 const AdminDashboard = () => {
-    const [people, setPeople] = useState([]);
-
+    const [people, setPeople] = useState([])
     useEffect(() => {
         let mounted = true;
-       getCards().then(items => {
+       getCards()
+         .then(items => {
            if(mounted) {
             setPeople(items.user)
-            console.log(people)
            }
          })
        return () => mounted = false;
@@ -27,31 +27,21 @@ const AdminDashboard = () => {
 
     return (
         <>
-            <NavigationBarDashboard />
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <img></img>
-                        <h3>Name</h3>
+            <NavigationBarDashboard/>
+            {people.map((person) => (
+                <div key={person._id}>
+                    <div className = "column">
+                        <div>
+                            <div className="card" style={{backgroundImage: `url(${person.profileImgUrl})`}}>
+                                <h3>{person.name}</h3>
+                                <button className = "b1">edit</button>
+                                <button className = "b2">delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="column">
-                    <div class="card">
-                        <img></img>
-                        <h3>Name</h3>
-                    </div>
-                </div><div class="column">
-                    <div class="card">
-                        <img></img>
-                        <h3>Name</h3>
-                    </div>
-                </div><div class="column">
-                    <div class="card">
-                        <img></img>
-                        <h3>Name</h3>
-                    </div>
-                </div>
-            </div>
+                
+            ))}
         </>
     )
 }

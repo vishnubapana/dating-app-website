@@ -19,13 +19,13 @@ function App(token) {
 
   const [authLoading, setAuthLoading] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(true);
 
 
-  useEffect(() => {
+  /*useEffect(() => {
     setIsAdmin(getUser().isAdmin)
 
-  }, [])
+  }, [])*/
   // if(authLoading && getToken()){
   //   return <div className="content">Checking Authentication...</div>
   // }

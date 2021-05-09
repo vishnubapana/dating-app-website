@@ -1,54 +1,76 @@
+h3 {
+  color: black;
+}
+
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  /* Float four columns side by side */
+  box-sizing:border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 30%;
+  height: 30%;
+  padding: 10px 10px 10px 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {
+  width: 30%;
+  height: 30%;
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
   .column {
-    float: left;
-    width: 30%;
-    padding: 10px 10px;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
-  
-  /* Remove extra left and right margins, due to padding in columns */
-  .row {margin: 0px 0px -10% 1%;}
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Style the counter cards */
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    text-align: left;
-    background-color: #f1f1f1;
-  }
+}
 
-  .card img {
-      max-width: 100%;
-      pointer-events: none;
-  }
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
 
-  .card h3 {
-    margin-top: 32px;
-    font-size: 32px;
-    padding: 0 16px;
-    pointer-events: none;
-    color: white;
-  }
+button {
+   /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
 
-  /* Responsive columns - one column layout (vertical) on small screens */
-  @media screen and (max-width: 600px) {
-    .column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-      margin-right: -50%;
-    }
-  }
+.b2 {
+  background-color: red;
+  position: absolute;
+  right:    20px;
+  bottom:   20px;
+  width: 20%;
+}
+.b1 {
+  background-color: gray;
+  position: absolute;
+  right:    150px;
+  bottom:   20px;
+  width: 20%;
+}
