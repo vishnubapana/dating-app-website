@@ -170,7 +170,7 @@ class MyProfile extends React.Component {
     return (
       <div>
         <NavigationBarDashboard />
-        <div>
+        <Row>
           <Col>
             <img src={this.state.profileImgUrl} style={imagestyle} alt="profile pic" />
           </Col>
@@ -274,7 +274,7 @@ class MyProfile extends React.Component {
             </Form>
           </Col>
 
-        </div>
+        </Row>
       </div>
     )
   }
