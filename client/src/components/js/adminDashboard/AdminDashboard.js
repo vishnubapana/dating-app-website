@@ -5,8 +5,12 @@ import NavigationBarDashboard from "../NavigationBarDashboard"
 import EditProfile from '../EditProfile'
 import TinderCards from '../tinderCards/TinderCards'
 import SwipeButtons from '../swipeButtons/SwipeButtons'
+<<<<<<< HEAD
 import { makeStyles } from '@material-ui/core/styles';
 // import "./admin.css"
+=======
+import "./admin.css"
+>>>>>>> 8edd4021e84016fb14ec15681a22c045f42ba19f
 import axios from "axios"
 import {
     Grid,
@@ -57,12 +61,17 @@ const AdminDashboard = () => {
     return (
         <>
             <NavigationBarDashboard/>
+<<<<<<< HEAD
             {/* {people.map((person) => (
                 <div key={person._id}>
+=======
+            {people.map((person) => (
+                <div key={person._id} className = "thisbody">
+>>>>>>> 8edd4021e84016fb14ec15681a22c045f42ba19f
                     <div className = "column">
-                        <div>
+                        <div className = "rowlen">
                             <div className="card" style={{backgroundImage: `url(${person.profileImgUrl})`}}>
-                                <h3>{person.name}</h3>
+                                <h3 className="h3">{person.name}</h3>
                                 <Link key ={person._id} to='/editProfile' className="btn btn-primary b1" >Edit</Link>
                                 <Link to="/userprofile" className="btn btn-primary b2">Delete</Link>
                             </div>
