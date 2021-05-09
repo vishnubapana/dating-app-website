@@ -4,21 +4,6 @@ var jwt = require("jsonwebtoken")
 var expressJwt = require("express-jwt")  
 
 
-exports.adminAccess = async(req, res, next) => {
-    try {
-        const user = await User.findOne({
-            _id: req.user.id
-        })
-        if(user.isAdmin === 0)
-            return res.status(status(400).json({
-                msg : "Not a valid Admin"
-            }))
-        next()
-    } catch(err){
-        return res.status(500).json({msg : err.message})
-    }
-}
-
 exports.signup = (req, res) => {
     const errors = validationResult(req)
 
