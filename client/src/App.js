@@ -10,6 +10,7 @@ import PublicRoute from './components/utils/PublicRoute';
 import PrivateRoute from './components/utils/PrivateRoute';
 import { getUser } from './components/utils/Common';
 import UserProfile from './components/js/UserProfile';
+import EditProfile from './components/js/EditProfile';
 import MyProfile from './components/js/MyProfile';
 import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
 
@@ -48,6 +49,7 @@ function App(token) {
         <Route path='/sign-up' component={SignUp}/>
         <PrivateRoute path='/dashboard' component={isAdmin ? AdminDashboard: Dashboard}/>
         <PrivateRoute path='/userprofile' component={MyProfile}/>
+        <PrivateRoute path='/editprofile' component={EditProfile}/>
         <PrivateRoute path='/logout' component={Logout}/>
       </Switch>
     </Router>

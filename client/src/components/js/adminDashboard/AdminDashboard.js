@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import {Link, useHistory} from 'react-router-dom'
+import { Route } from "react-router";
 import NavigationBarDashboard from "../NavigationBarDashboard"
-import TinderCards from '../tinderCards/TinderCards'
-import SwipeButtons from '../swipeButtons/SwipeButtons'
+import EditProfile from '../EditProfile'
 import "./admin.css"
 import axios from "axios"
 
@@ -24,6 +25,14 @@ const AdminDashboard = () => {
          })
        return () => mounted = false;
      }, []);
+    const history = useHistory();
+    function onEdit(e) {
+        console.log(e.target.value);
+        
+        history.push('/editProfile', {
+            edit_id: e.target_valuse
+          })
+    }
 
     return (
         <>
@@ -34,8 +43,8 @@ const AdminDashboard = () => {
                         <div>
                             <div className="card" style={{backgroundImage: `url(${person.profileImgUrl})`}}>
                                 <h3>{person.name}</h3>
-                                <button className = "b1">edit</button>
-                                <button className = "b2">delete</button>
+                                <Link key ={person._id} to='/editProfile' className="btn btn-primary b1" >Edit</Link>
+                                <Link to="/userprofile" className="btn btn-primary b2">Delete</Link>
                             </div>
                         </div>
                     </div>
