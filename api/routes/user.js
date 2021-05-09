@@ -1,5 +1,5 @@
 const express = require("express")
-const { signup, signin, signout, users, getsingleuser, tindercards, rightswipeupdate, leftswipeupdate, unmatch, tinderfilteredcards,mymatches,updateprofile } = require("../controllers/user")
+const { signup, signin, signout, users, getsingleuser, tindercards, rightswipeupdate, leftswipeupdate, unmatch, tinderfilteredcards,mymatches,updateprofile} = require("../controllers/user")
 const { check } = require("express-validator")
 const router = express.Router()
 
