@@ -10,15 +10,15 @@ import PublicRoute from './components/utils/PublicRoute';
 import PrivateRoute from './components/utils/PrivateRoute';
 import EditProfile from './components/js/EditProfile';
 import MyProfile from './components/js/MyProfile';
-import AdminDashboard from './components/js/adminDashboard/AdminDashboard';
 import Matches from './components/js/Matches';
 import { getUser } from './components/utils/Common';
+import Footer from './components/js/footer/Footer'
+import HeroSection from './components/js/herosection/HeroSection';
 
  // GET USER INFORMATION FROM DATABASE SHOWING 1 FOR TRUE AND 0 FOR FALSE
 
 function App(token) {
 
-  const [authLoading, setAuthLoading] = useState(true);
 
   const [isAdmin, setIsAdmin] = useState();
 
@@ -30,16 +30,6 @@ function App(token) {
     
 
   }, [isAdmin])
-  // if(authLoading && getToken()){
-  //   return <div className="content">Checking Authentication...</div>
-  // }
-
-  // useEffect(() => {
-  //   const token = getToken();
-  //   if(!token){
-  //     return;
-  //   }
-  // }, [input])
 
 
   return (
@@ -47,6 +37,8 @@ function App(token) {
       <Switch>
         <Route path='/' exact >
           <NavigationBar/>
+          <HeroSection />
+          <Footer />
         </Route>
         <PublicRoute path='/sign-in' component={SignIn}/>
         <Route path='/sign-up' component={SignUp}/>
@@ -61,4 +53,3 @@ function App(token) {
 }
 
 export default App;
-// export default withRouter(App);

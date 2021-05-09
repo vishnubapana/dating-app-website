@@ -76,6 +76,22 @@
   .menu-icon {
     display: none;
   }
+
+  .menu-title {
+    clear: both;
+    width: 50%;
+    height: 55%;
+    margin-left: 10px;
+    opacity: 1;
+  }
+
+  .menu-title1 {
+    clear: both;
+    width: 17%;
+    height: 30%;
+    margin-left: 10px;
+    opacity: 1;
+  }
   
   @media screen and (max-width: 960px) {
     .NavbarItems {
@@ -107,6 +123,12 @@
       padding: 2rem;
       width: 100%;
       display: table;
+    }
+
+    .nav-heading {
+      text-align: left;
+      padding: 2rem;
+      width: 100%;
     }
   
     .nav-links:hover {
@@ -157,4 +179,20 @@
       color: #242424;
       transition: 250ms;
     }
+  }
+
+  .inputSearch {
+    /* Other styling... */
+    text-align: left;
+    clear: both;
+    float:left;
+    margin-left:5px;
+  }
+
+  .titleText {
+    text-align: left;
+    clear: both;
+    float:left;
+    margin-left:25px;
+    width: 40%;
   }

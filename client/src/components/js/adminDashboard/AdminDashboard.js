@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import { Route } from "react-router";
-import NavigationBarDashboard from "../NavigationBarDashboard"
+import NavigationBarWithSearch from "../NavigationBarWithSearch"
 import EditProfile from '../EditProfile'
 import TinderCards from '../tinderCards/TinderCards'
 import SwipeButtons from '../swipeButtons/SwipeButtons'
@@ -17,6 +17,7 @@ import {
     Box,
     CardMedia
   } from "@material-ui/core/";
+import NavigationBarWithSearchAdmin from '../NavigationBarWithSearchAdmin';
   
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,16 +36,22 @@ export function getCards() {
 const AdminDashboard = () => {
     const classes = useStyles();
     const [people, setPeople] = useState([])
+    const [filteredPeople, setFilteredPeople] = useState([])
+
+
     useEffect(() => {
         let mounted = true;
        getCards()
          .then(items => {
            if(mounted) {
             setPeople(items.user)
+            setFilteredPeople(items.user)
            }
          })
        return () => mounted = false;
      }, []);
+
+
     const history = useHistory();
     function onEdit(e) {
         console.log(e.target.value);
@@ -54,9 +61,17 @@ const AdminDashboard = () => {
           })
     }
 
+    const handleInput = (e) => {
+        console.log(e.target.value)
+        let filteredData = people.filter((person) => {
+          return person.name.toLowerCase().includes(e.target.value.toLowerCase())
+        });
+        setFilteredPeople(filteredData)
+      }
+
     return (
         <>
-            <NavigationBarDashboard/>
+            <NavigationBarWithSearchAdmin handleInput={handleInput}/>
             {/* {people.map((person) => (
                 <div key={person._id}>
                     <div className = "column">
@@ -81,7 +96,7 @@ const AdminDashboard = () => {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {people.map((person) => (
+          {filteredPeople.map((person) => (
             <Grid item xs={4} key={person._id}>
               <Card>
                 <CardHeader

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import NavigationBarDashboard from './NavigationBarDashboard'
+import NavigationBarWithSearch from './NavigationBarWithSearch'
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 export function getMatches() {
   var _id = getUser()._id;
   return fetch('http://localhost:8000/api/matches/' + _id)
@@ -32,15 +34,25 @@ export function getMatches() {
 
 const Matches = () => {
 
+  const handleInput = (e) => {
+    console.log(e.target.value)
+    let filteredData = people.filter((person) => {
+      return person.name.toLowerCase().includes(e.target.value.toLowerCase())
+    });
+    setFilteredPeople(filteredData)
+  }
+
   const classes = useStyles();
 
   const [people, setPeople] = useState([])
+  const [filteredPeople, setFilteredPeople] = useState([])
   useEffect(() => {
     let mounted = true;
     getMatches()
       .then(items => {
         if (mounted) {
           setPeople(items.user)
+          setFilteredPeople(items.user)
         }
       })
     return () => mounted = false;
@@ -85,7 +97,7 @@ const Matches = () => {
     // </div> 
 
     <>
-      <NavigationBarDashboard />
+      <NavigationBarWithSearch handleInput={handleInput}/>
       <div className={classes.root}>
         <Grid
           container
@@ -94,7 +106,7 @@ const Matches = () => {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {people.map((person) => (
+          {filteredPeople.map((person) => (
             <Grid item xs={4} key={person.name}>
               <Card>
                 <CardHeader
