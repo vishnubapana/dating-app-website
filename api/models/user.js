@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
     },
     matches: {
         type: Array,
-        "default" : [String]
+        "default" : []
     },
     rightSwipes: {
         type: Array,
