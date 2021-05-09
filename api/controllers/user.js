@@ -368,6 +368,48 @@ exports.updateprofile=(req,res)=> {
         })
     });
 }
+
+exports.mymatches = (req, res) => {
+
+    matchesArray = []
+    var map = []
+
+    User.findOne({'_id': req.params.id}, (err, user) => {
+        console.log(user.matches)
+        matchesArray.push(user.matches)
+    })
+
+    // newMatchesArray = []
+
+    // matchesArray.forEach((match) => {
+    //     newMatchesArray.push(String(match))
+    // })
+
+    User.find({'_id': { $in: matchesArray}}, (err, matchedUsers) => {
+        if(err){
+            return res.status(400).json({
+                    error: err
+            })
+        }
+
+        console.log(typeof (matchesArray))
+        console.log("Matched users"+matchedUsers)
+        matchedUsers.forEach(function(user) {
+             map.push({"name": user.name, "url": user.profileImgUrl, "bio": user.bio})
+
+          })
+
+        
+    });
+    
+
+        // Send response
+        return res.json({
+            user: map
+        })
+}
+
+
 // exports.updatetoken = (req, res) => {
 //     const { email, token } = req.body
 
