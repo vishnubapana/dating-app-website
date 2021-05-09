@@ -207,8 +207,20 @@ exports.rightswipeupdate = (req, res) => {
 
         })
 
+        let match = false
 
-        if(users[1].rightSwipes.includes(idfrom)){
+        const rightSwipesArray = users[1].rightSwipes
+
+        for(var i=0; i<rightSwipesArray.length; i++){
+            if(rightSwipesArray[i] == idfrom){
+                match = true
+                break
+            }
+        }
+
+
+
+        if(match){
             console.log("It's a match")
             resultMessage = "Match"
             //update matches of user 1
