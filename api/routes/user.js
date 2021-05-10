@@ -1,5 +1,5 @@
 const express = require("express")
-const { signup, signin, signout, users, getsingleuser, tindercards, rightswipeupdate, leftswipeupdate, unmatch, tinderfilteredcards,mymatches,updateprofile} = require("../controllers/user")
+const { signup, signin, signout, users, getsingleuser, tindercards, rightswipeupdate, leftswipeupdate, unmatch, tinderfilteredcards,mymatches,updateprofile,adminDashboardsoftdelete} = require("../controllers/user")
 const { check } = require("express-validator")
 const router = express.Router()
 
@@ -38,5 +38,6 @@ router.put('/users/:id', updateprofile)
 
 router.get('/matches/:id', mymatches)
 
+router.put('/softdelete/:id', adminDashboardsoftdelete)
 
 module.exports = router

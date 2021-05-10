@@ -371,6 +371,34 @@ exports.updateprofile=(req,res)=> {
     });
 }
 
+exports.adminDashboardsoftdelete=(req,res)=> {
+    console.log("Req body is:")
+    console.log(req)
+    const errors = validationResult(req)
+
+    if(!errors.isEmpty()){
+        return res.status(400).json({
+            error: errors.array()[0].msg
+        })
+    }
+    let data = req.body
+    // console.log(user);
+    const filter= req.params.id;
+    // console.log(data);
+    User.updateOne({'_id':filter},{ '$set': {isSoftDeleted:data.isSoftDeleted}}, function(err, data){
+        if(err){
+            return res.status(400).json({
+                error: "No user is found"
+            })
+        }
+
+        // Send response
+        return res.json({
+            "status": "User soft delete complete",
+            data: data
+        })
+    });
+}
 exports.mymatches = (req, res) => {
 
     
