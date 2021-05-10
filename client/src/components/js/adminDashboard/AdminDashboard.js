@@ -23,7 +23,12 @@ import NavigationBarWithSearchAdmin from '../NavigationBarWithSearchAdmin';
     root: {
       flexGrow: 1,
       padding: theme.spacing(2)
-    }
+    },
+
+    color: {
+      backgroundColor: '#625d59',
+      color: '#fff'
+      }
   }));
 
 
@@ -98,7 +103,7 @@ const AdminDashboard = () => {
         >
           {filteredPeople.map((person) => (
             <Grid item xs={4} key={person._id}>
-              <Card>
+              <Card className={classes.color}>
                 <CardHeader
                   title={`Name : ${person.name}`}
                   subheader={`Bio : ${person.bio}`}
@@ -108,7 +113,7 @@ const AdminDashboard = () => {
                     component="img"
                     className='mediastyle'
                     image={person.profileImgUrl}
-                    height="200px"
+                    height="300px"
                     width="500px"
                   />
                   <br></br>

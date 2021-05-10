@@ -386,7 +386,7 @@ exports.mymatches = (req, res) => {
             let map = []
             for(var i=0; i<matchedUsers.length; i++){
                 console.log(matchedUsers[i].name)
-                map.push({"name": matchedUsers[i].name, "url": matchedUsers[i].profileImgUrl, "bio": matchedUsers[i].bio})
+                map.push({"id": matchedUsers[i]._id, "name": matchedUsers[i].name, "url": matchedUsers[i].profileImgUrl, "bio": matchedUsers[i].bio})
             }
             
             

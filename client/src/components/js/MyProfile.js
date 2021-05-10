@@ -165,12 +165,17 @@ class MyProfile extends React.Component {
 
   render() {
     const imagestyle = {
-      width: "100%", height: "100%", dispaly: "block"
+      width: "90%", height: "70%", display: "block", margin: "20px"
     }
+
+    const formStyle = {
+      margin: "10px 20px 0px 0px"
+    }
+    
     return (
       <div>
         <NavigationBarDashboard />
-        <Row>
+        <Row className="p-10 m-10">
           <Col>
             <img src={this.state.profileImgUrl} style={imagestyle} alt="profile pic" />
           </Col>
@@ -178,7 +183,7 @@ class MyProfile extends React.Component {
             <h1>User Profile</h1>
 
 
-            <Form onSubmit={this.UpdateProfileHandler} className="form">
+            <Form onSubmit={this.UpdateProfileHandler} className="form" style={formStyle}>
               <Form.Group controlId="formCategory1">
                 <Form.Label>First Name</Form.Label>
                 <Form.Control type="text" name='name' value={this.state.name} onChange={this.handleInputChange} />
@@ -190,76 +195,9 @@ class MyProfile extends React.Component {
                 <Form.Control type="textarea" name='bio' value={this.state.bio} onChange={this.handleInputChange} />
               </Form.Group>
 
-              <Form.Group controlId="formCategory3">
-                <h5>Gender</h5>
-                <label>
-                  Male
-          <input
-                    id="gender1"
-                    name="gender"
-                    type="radio"
-                    value="male"
-                    checked={this.state.genderM}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-                <label>
-                  Female
-          <input
-                    id="gender2"
-                    name="gender"
-                    type="radio"
-                    value="female"
-                    checked={this.state.genderF}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-                <label>
-                  Other
-          <input
-                    id="gender3"
-                    name="gender"
-                    type="radio"
-                    value="notsure"
-                    checked={this.state.genderN}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Group>
+              
 
-              <Form.Group controlId="formCategory4">
-                <h5> Looking For</h5>
-                <label>
-                  Male
-          <input
-                    name="lookingfor"
-                    type="radio"
-                    value="male"
-                    checked={this.state.lookingforM}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-                <label>
-                  Female
-          <input
-                    name="lookingfor"
-                    type="radio"
-                    value="female"
-                    checked={this.state.lookingforF}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-                <label>
-                  Both
-          <input
-                    name="lookingfor"
-                    type="radio"
-                    value="notsure"
-                    checked={this.state.lookingforN}
-                    onChange={this.handleInputChange}
-                  />
-                </label>
-              </Form.Group>
+              
 
               {/* <Form.Group controlId="formCategory4">
     <Form.Label>Profile Image</Form.Label>

@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import NavigationBarWithSearch from './NavigationBarWithSearch'
 import { makeStyles } from '@material-ui/core/styles';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import '../css/matches.css'
-import { Link, useHistory } from 'react-router-dom'
 import { getUser } from '../utils/Common';
+import './cards/Cards.css'
+import CardItem from './cards/CardItem';
 import {
   Grid,
   Card,
   CardContent,
-  Typography,
   CardHeader,
   Box
 } from "@material-ui/core/";
@@ -21,7 +19,13 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: theme.spacing(2)
-  }
+  },
+
+  color: {
+    backgroundColor: '#fff',
+    color: '#7b7b7b'
+    }
+
 }));
 
 
@@ -42,6 +46,28 @@ const Matches = () => {
     setFilteredPeople(filteredData)
   }
 
+
+  const handleUnmatch = (id) => {
+    // console.log("Handle unmatch called "+id)
+    return fetch('http://localhost:8000/api/unmatch', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "idfrom": String(getUser()._id),
+      "idto": String(id)
+  })
+  })
+    .then(data => data.json())
+    .then((data) => {
+      console.log("Response is "+data.message)
+    })
+    .catch((error) => {
+      console.log("Error "+error)
+    })
+  }
+
   const classes = useStyles();
 
   const [people, setPeople] = useState([])
@@ -56,96 +82,45 @@ const Matches = () => {
         }
       })
     return () => mounted = false;
-  }, []);
+  }, [people]);
 
   return (
-    // <div>
-    // <NavigationBarDashboard />
-    //       <Typography classname='headingstyle' gutterBottom variant="h3" component="h2">Matches</Typography>
-    //   {people.map((person) => (    
-    //     <div class='inlinepurpose'>
-    //   <Card 
-    //   className='rootstyle'
-    //   >
-    //   <CardActionArea>
-    //     <CardMedia
-    //       component="img"
-    //       className='mediastyle'
-    //       image={person.url}
-    //       height="100%"
-    //     />
-    //     <CardContent>
-    //       <Typography gutterBottom variant="h5" component="h2">
-    //         {person.name}
-    //       </Typography>
-    //       <Typography variant="body2" color="textSecondary" component="p">
-    //         {person.bio}
-    //       </Typography>
-    //     </CardContent>
-    //   </CardActionArea>
-    //   <CardActions>
-    //     <Button size="small" color="primary">
-    //       Unmatch
-    //     </Button>
-    //     <Button size="small" color="primary">
-    //       Chat
-    //     </Button>
-    //   </CardActions>
-    // </Card>
-    // </div>
-    // ))}
-    // </div> 
-
     <>
       <NavigationBarWithSearch handleInput={handleInput}/>
-      <div className={classes.root}>
-        <Grid
+      <ul className='cards__items'>
+      <Grid
           container
           spacing={3}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
+          
         >
-          {filteredPeople.map((person) => (
-            <Grid item xs={4} key={person.name}>
-              <Card>
-                <CardHeader
-                  title={`Name : ${person.name}`}
-                  subheader={`Bio : ${person.bio}`}
-                />
-                <CardContent>
-                  <CardMedia
-                    component="img"
-                    className='mediastyle'
-                    image={person.url}
-                    height="200px"
-                    width="500px"
-                  />
-                  <br></br>
-
-                  <Box align='center' display="flex" justifyContent="space-between">
+      {filteredPeople.map((person) => (
+        <Grid item xs={4} key={person.id}>
+          <Card>
+            <CardItem
+            src={person.url}
+            text={person.bio}
+            label={person.name}
+          />
+          <Box align='center' display="flex" justifyContent="space-between">
                     <Button
-                      color='primary'
                       size='large'
-                      variant='contained'
+                      color='primary'
+                      onClick={() => handleUnmatch(person.id)}
                     >
                       Unmatch
     </Button>
                     <Button
-                      color='primary'
                       size='large'
-                      variant='contained'
+                      color='primary'
                     >
                       Chat
     </Button></Box>
-
-                </CardContent>
-
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+    </Card>
+          </Grid>
+      ))}
+      </Grid>
+          </ul>
+      
     </>
   )
 

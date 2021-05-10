@@ -1,6 +1,5 @@
 .cards {
-  padding: 4rem;
-  background: #fff;
+  padding: 2rem;
 }
 
 h1 {
@@ -90,7 +89,7 @@ h1 {
 }
 
 .cards__item__info {
-  padding: 20px 30px 30px;
+  padding: 20px 10px 10px;
 }
 
 .cards__item__text {
