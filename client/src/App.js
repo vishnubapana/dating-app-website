@@ -13,8 +13,10 @@ import MyProfile from './components/js/MyProfile';
 import Matches from './components/js/Matches';
 import { getUser } from './components/utils/Common';
 import Footer from './components/js/footer/Footer'
+import Chats from './components/js/chats/Chats'
 import HeroSection from './components/js/herosection/HeroSection';
 import Services from './components/js/Services';
+import ChatScreen from './components/js/chatScreen/ChatScreen'
 
  // GET USER INFORMATION FROM DATABASE SHOWING 1 FOR TRUE AND 0 FOR FALSE
 
@@ -49,6 +51,12 @@ function App(token) {
         <PrivateRoute path='/mymatches' component={Matches}/>
         <PrivateRoute path='/services' component={Services}/>
         <PrivateRoute path='/logout' component={Logout}/>
+        <Route path="/chats/:person">
+            <ChatScreen />
+          </Route>
+          <Route path="/chats">
+            <Chats />
+          </Route>
       </Switch>
     </Router>
   );

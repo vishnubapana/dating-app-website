@@ -14,6 +14,7 @@ import {
   CardHeader,
   Box
 } from "@material-ui/core/";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,12 +39,19 @@ export function getMatches() {
 
 const Matches = () => {
 
+  let history = useHistory()
+
   const handleInput = (e) => {
     console.log(e.target.value)
     let filteredData = people.filter((person) => {
       return person.name.toLowerCase().includes(e.target.value.toLowerCase())
     });
     setFilteredPeople(filteredData)
+  }
+
+  const handleChat = () => {
+    console.log("Chat is clicked");
+    history.push('/chats')
   }
 
 
@@ -87,39 +95,50 @@ const Matches = () => {
   return (
     <>
       <NavigationBarWithSearch handleInput={handleInput}/>
+      <div className={classes.root}>
       <ul className='cards__items'>
       <Grid
           container
           spacing={3}
-          
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
         >
       {filteredPeople.map((person) => (
         <Grid item xs={4} key={person.id}>
           <Card>
+          <CardContent>
             <CardItem
             src={person.url}
-            text={person.bio}
+            text="This is my bio"
             label={person.name}
           />
           <Box align='center' display="flex" justifyContent="space-between">
                     <Button
                       size='large'
                       color='primary'
-                      onClick={() => handleUnmatch(person.id)}
+                      variant='contained'
+                      onClick={() => handleUnmatch()}
                     >
                       Unmatch
     </Button>
                     <Button
                       size='large'
                       color='primary'
+                      variant='contained'
+                      onClick={() => handleChat(person.id)}
                     >
                       Chat
     </Button></Box>
+    </CardContent>
     </Card>
           </Grid>
       ))}
       </Grid>
           </ul>
+
+          </div>
+
       
     </>
   )
