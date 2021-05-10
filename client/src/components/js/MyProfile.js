@@ -165,7 +165,7 @@ class MyProfile extends React.Component {
 
   render() {
     const imagestyle = {
-      width: "90%", height: "70%", display: "block", margin: "20px"
+      width: "90%", height: "100%", display: "block", margin: "20px"
     }
 
     const formStyle = {
