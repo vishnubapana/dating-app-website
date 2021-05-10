@@ -45,17 +45,16 @@ const AdminDashboard = () => {
 
 
     useEffect(() => {
-        let mounted = true;
-       getCards()
-         .then(items => {
-           if(mounted) {
-            setPeople(items.user)
-            setFilteredPeople(items.user)
-           }
-         })
-       return () => mounted = false;
-     }, []);
-
+      let mounted = true;
+     getCards()
+       .then(items => {
+         if(mounted) {
+          setPeople(items.user)
+          setFilteredPeople(items.user)
+         }
+       })
+     return () => mounted = false;
+   }, []);
 
     const history = useHistory();
     function onEdit(e) {
@@ -72,6 +71,25 @@ const AdminDashboard = () => {
           return person.name.toLowerCase().includes(e.target.value.toLowerCase())
         });
         setFilteredPeople(filteredData)
+      }
+
+     const  handleSoftDelete=(personID)=>{
+        return fetch('http://localhost:8000/api/softdelete/'+personID, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "id": personID,
+            "isSoftDeleted":1
+        }) 
+        })
+        .then(res => {
+          console.log(res);
+          window.location.reload();
+        })
+          .catch(err => console.log(err))
+        
       }
 
     return (
@@ -101,8 +119,12 @@ const AdminDashboard = () => {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {filteredPeople.map((person) => (
-            <Grid item xs={4} key={person._id}>
+          {filteredPeople.map((person) => {
+            console.log("outside if loop:ID:"+person._id+"isSoftDeleted"+person.isSoftDeleted);
+            if(person.isSoftDeleted!=1){
+              console.log("inside if loop:ID:"+person._id+"isSoftDeleted"+person.isSoftDeleted);
+              
+              return <Grid item xs={4} key={person._id}>
               <Card className={classes.color}>
                 <CardHeader
                   title={`Name : ${person.name}`}
@@ -130,6 +152,8 @@ const AdminDashboard = () => {
                       color='primary'
                       size='large'
                       variant='contained'
+                      // value={person._id}
+                      onClick={() =>handleSoftDelete(person._id)}
                     >
                       Delete
     </Button></Box>
@@ -138,7 +162,10 @@ const AdminDashboard = () => {
 
               </Card>
             </Grid>
-          ))}
+            }
+}
+          // )
+          )}
         </Grid>
       </div>
         </>
