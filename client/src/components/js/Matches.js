@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
   color: {
     backgroundColor: '#fff',
-    color: '#7b7b7b'
+    color: '#fff'
     }
 
 }));
@@ -46,6 +46,7 @@ const Matches = () => {
     let filteredData = people.filter((person) => {
       return person.name.toLowerCase().includes(e.target.value.toLowerCase())
     });
+    console.log(filteredData)
     setFilteredPeople(filteredData)
   }
 
@@ -106,7 +107,10 @@ const Matches = () => {
         >
       {filteredPeople.map((person) => (
         <Grid item xs={4} key={person.id}>
-          <Card>
+          <Card className={classes.color}>
+                <CardHeader
+                  title={`${person.name}`}
+                />
           <CardContent>
             <CardItem
             src={person.url}
@@ -118,7 +122,7 @@ const Matches = () => {
                       size='large'
                       color='primary'
                       variant='contained'
-                      onClick={() => handleUnmatch()}
+                      onClick={() => handleUnmatch(person.id)}
                     >
                       Unmatch
     </Button>
@@ -126,7 +130,7 @@ const Matches = () => {
                       size='large'
                       color='primary'
                       variant='contained'
-                      onClick={() => handleChat(person.id)}
+                      onClick={() => handleChat()}
                     >
                       Chat
     </Button></Box>
